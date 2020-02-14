@@ -84,7 +84,45 @@ public class System {
         java.lang.System.out.println("loged in as: " + String.valueOf(identity));
     }
 	public void makeCall() {
-
+            java.lang.System.out.println("Please put in the number you want to call");
+            Scanner numberin = new Scanner(java.lang.System.in);
+            int caller = numberin.nextInt();
+            boolean check = true;
+            for(User x:users) {
+    		if(x.getNumber().equals(caller))
+                {
+    			check = false;
+    		}
+            }
+            boolean freecall=false;
+            for(User x:users)
+            {
+                if (x.getNumber().equals(caller) && x.getAvailability())
+                {
+                    freecall=true;
+                }
+            }
+            if(caller>999 || caller<0 || check)
+            {
+                java.lang.System.out.println("That is not a valid number");
+            }
+            else if(!freecall)
+            {
+                java.lang.System.out.println("That number is not available");
+            }
+            else
+            {
+                for(User x:users)
+                {
+                    if (x.getNumber().equals(caller))
+                    {
+                        x.setIsAvailable(false);
+                        java.lang.System.out.println("Call started: Please hit a number to end");
+                        int hangup = numberin.nextInt();
+                        x.setIsAvailable(true);
+                    }
+                }
+            }
     }
     
     public void answerCall() {
