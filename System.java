@@ -166,6 +166,10 @@ public class System {
 		java.lang.System.out.println("now there is(are) " + String.valueOf(users.size()) + " users");
     }
     
+    public void logOut()  {
+        
+    }
+    
     //show all logs
     public void viewLog() {
     	try {
@@ -231,7 +235,7 @@ public class System {
         switch(system.identity) {
         	case 1:	//when login as administrator
         		while(true) {
-        			java.lang.System.out.println("\n\nchoose what do to: \n1) view log \n2) add number \n3) delete number \n4)exit");
+        			java.lang.System.out.println("\n\nchoose what do to: \n1) view log \n2) add number \n3) delete number \n4) log out \n5)exit");
         			String choice = input.nextLine();
         			int temp = Integer.parseInt(choice);
 
@@ -241,7 +245,9 @@ public class System {
         				system.addNumber();
         			}else if(temp ==3) {	//delete number
         				system.deleteNumbre();
-        			}else if(temp ==4) {	//exit
+                                }else if(temp ==4) {    //log out of menu
+                                        system.login();
+        			}else if(temp ==5) {	//exit
         				break;
         			}else {
         				java.lang.System.out.println("input is not valid");
@@ -252,7 +258,7 @@ public class System {
 				int customerNum = 570;
 				java.lang.System.out.println("input is not valid");
         		while(true) {
-        			java.lang.System.out.println("\n\nchoose what do to: \n1) view activity \n2) make call \n3) accept call \n4)exit");
+        			java.lang.System.out.println("\n\nchoose what do to: \n1) view activity \n2) make call \n3) accept call \n4) log out \n5)exit");
         			String choice = input.nextLine();
         			int temp = Integer.parseInt(choice);
         			if(temp == 1) {
@@ -261,7 +267,9 @@ public class System {
         				system.makeCall();
         			}else if(temp ==3) {
         				system.answerCall();
-        			}else if(temp ==4) {
+                                }else if(temp ==4) {    //log out of menu
+                                        system.login();
+        			}else if(temp ==5) {
         				break;
         			}else {
         				java.lang.System.out.println("input is not valid");
