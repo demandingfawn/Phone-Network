@@ -1,3 +1,4 @@
+package Phone;
 
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public class System {
                             "570 was on a call with 414 for 7 minutes.\n" +
                             "414 was on a call with 570 for 19 minutes.\n" +
                             "726 was on a call with 570 for 2 minutes.\n" +
-                            "570 was on a call with 726 for 6 minutes.1111\n");	// '\n' was added at the end of the sentence.
+                            "570 was on a call with 726 for 6 minutes.\n");	// '\n' was added at the end of the sentence.
             writer.close();
         }
         catch(Exception e){
@@ -166,7 +167,7 @@ public class System {
     public void addNumber() {
     	Scanner input = new Scanner(java.lang.System.in);
     	java.lang.System.out.println("Type a number you want to add");
-    	int number =  Integer.parseInt(input.nextLine());
+        int number =  Integer.parseInt(input.nextLine());
     	boolean check = false;
     	for(User x:users) {
     		if(x.getNumber().equals(number)) {
@@ -188,8 +189,8 @@ public class System {
     }
     
     //remove one number in the first of the list, and restart engine
-    public void deleteNumbre() {
-    	if(users.size()>0) {
+    public void deleteNumber() {
+        if(users.size()>0) {
         	users.removeFirst();
     	}
     	else {
@@ -230,8 +231,8 @@ public class System {
     	/*
         //TODO: put a base log into the log file
         //TODO: numbers beginning with a 0
-        System system = new System();
-        Database database = new Database();
+        Phone.System system = new Phone.System();
+        Phone.Database database = new Phone.Database();
         LinkedList<User> users = new LinkedList<User>();
         Engine engine = new Engine();
         int identity; // 1 = administrator , 2 = customer;
@@ -260,61 +261,65 @@ public class System {
             writer.close();
         }
         catch(Exception e){
-            java.lang.System.out.println("Error creating base log file.");
+            java.lang.Phone.System.out.println("Error creating base log file.");
         }
 
         engine.updateUsers(users);
         engine.start();
         */
-		System system = new System();
-        system.login();
-        
+        System system = new System();
         Scanner input = new Scanner(java.lang.System.in);
-        switch(system.identity) {
-        	case 1:	//when login as administrator
-        		while(true) {
-        			java.lang.System.out.println("\n\nchoose what do to: \n1) view log \n2) add number \n3) delete number \n4) log out \n5)exit");
-        			String choice = input.nextLine();
-        			int temp = Integer.parseInt(choice);
 
-        			if(temp == 1) {	//view log
-        				system.viewLog();
-        			}else if(temp ==2) {	//add number
-        				system.addNumber();
-        			}else if(temp ==3) {	//delete number
-        				system.deleteNumbre();
-                                }else if(temp ==4) {    //log out of menu
-                                        system.login();
-        			}else if(temp ==5) {	//exit
-        				break;
-        			}else {
-        				java.lang.System.out.println("input is not valid");
-        			}
-        		}
-        		break;
-			case 2:	//when login as customer
-				int customerNum = 570;
-				java.lang.System.out.println("input is not valid");
-        		while(true) {
-        			java.lang.System.out.println("\n\nchoose what do to: \n1) view activity \n2) make call \n3) accept call \n4) log out \n5)exit");
-        			String choice = input.nextLine();
-        			int temp = Integer.parseInt(choice);
-        			if(temp == 1) {
-        				system.viewActivity(customerNum);
-        			}else if(temp ==2) {
-        				system.makeCall();
-        			}else if(temp ==3) {
-        				system.answerCall();
-                                }else if(temp ==4) {    //log out of menu
-                                        system.login();
-        			}else if(temp ==5) {
-        				break;
-        			}else {
-        				java.lang.System.out.println("input is not valid");
-        			}
-        		}
-        		break;
+            system.login();
+            while(true) {
+                switch (system.identity) {
+                    case 1:    //when login as administrator
+                        outer:
+                        while (true) {
+                            java.lang.System.out.println("\n\nchoose what do to: \n1) view log \n2) add number \n3) delete number \n4) log out \n5)exit");
+                            String choice = input.nextLine();
+                            int temp = Integer.parseInt(choice);
+
+                            if (temp == 1) {    //view log
+                                system.viewLog();
+                            } else if (temp == 2) {    //add number
+                                system.addNumber();
+                            } else if (temp == 3) {    //delete number
+                                system.deleteNumber();
+                            } else if (temp == 4) {//log out of menu
+                                system.login();
+                                break;
+                            } else if (temp == 5) {    //exit
+                                break;
+                            } else {
+                                java.lang.System.out.println("input is not valid");
+                            }
+                        }
+                        break;
+                    case 2:    //when login as customer
+                        int customerNum = 570;
+                        outer:
+                        while (true) {
+                            java.lang.System.out.println("\n\nchoose what do to: \n1) view activity \n2) make call \n3) accept call \n4) log out \n5)exit");
+                            String choice = input.nextLine();
+                            int temp = Integer.parseInt(choice);
+                            if (temp == 1) {
+                                system.viewActivity(customerNum);
+                            } else if (temp == 2) {
+                                system.makeCall();
+                            } else if (temp == 3) {
+                                system.answerCall();
+                            } else if (temp == 4) {    //log out of menu
+                                system.login();
+                                break outer;
+                            } else if (temp == 5) {
+                                break;
+                            } else {
+                                java.lang.System.out.println("input is not valid");
+                            }
+                        }
+                        break;
+                }
+            }
         }
-        	
-    }
 }
