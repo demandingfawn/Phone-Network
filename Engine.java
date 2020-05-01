@@ -13,7 +13,6 @@ public class Engine extends Thread {
     public void run(){
         int user1;
         int user2;
-        callFactory factory = new callFactory();
         try{
             while(true){
                 sleep(random.nextInt(5000) + 5000);
@@ -22,9 +21,11 @@ public class Engine extends Thread {
 
                 //if the users generated are different and they are both available then they call each other
                 if ((user1 != user2) && (users.get(user1).getAvailability()) && (users.get(user2).getAvailability())){
-                    ongoingCalls.add(factory.getCall(users.get(user1), users.get(user2)));
+                    ongoingCalls.add(new Call(users.get(user1), users.get(user2)));
                     ongoingCalls.getLast().start();
+                    //TODO: remove the ongoing call from the list once it is done
                 }
+                //TODO: every now and then display that a user called another user who was busy
             }
         }
         catch(Exception ignored){ }
