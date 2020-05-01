@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 
 import java.util.Scanner;
@@ -81,7 +80,7 @@ public class System {
                 java.lang.System.out.println("Invalid ID or Password");
             }
         }
-        java.lang.System.out.println("loged in as: " + String.valueOf(identity));
+        java.lang.System.out.println("logged in as: " + String.valueOf(identity));
     }
     public void makeCall() {
         java.lang.System.out.println("Please put in the number you want to call");
@@ -125,10 +124,6 @@ public class System {
         }
     }
 
-    public void answerCall() {
-
-    }
-
     //show logs that have phone number of customer
     public void viewActivity(int phoneNum) {
         try {
@@ -161,7 +156,7 @@ public class System {
             java.lang.System.out.println("Error creating base log file.");
         }
     }
-    //check if numbre exists in user list
+    //check if number exists in user list
     public boolean checkExist(int num) {
         boolean check = false;
         for(User x:users) {
@@ -197,21 +192,17 @@ public class System {
         java.lang.System.out.println("now there is(are) " + String.valueOf(users.size()) + " users");
     }
 
-    public void logOut()  {
-
-    }
-
     public static void main(String args[]) {
         System system = new System();
         Scanner input = new Scanner(java.lang.System.in);
 
         system.login();
-        while(true) {
+        while(system.identity != 3) {
             switch (system.identity) {
                 case 1:    //when login as administrator
                     admin currentAdmin = new admin(system);
                     while (true) {
-                        java.lang.System.out.println("\n\nchoose what do to: \n1) view log \n2) add number \n3) delete number \n4) log out \n5)exit");
+                        java.lang.System.out.println("\n\nSelect an option: \n1) View log \n2) Add number \n3) Delete number \n4) Log out \n5) Exit");
                         String choice = input.nextLine();
                         int temp = Integer.parseInt(choice);
 
@@ -225,6 +216,7 @@ public class System {
                             system.login();
                             break;
                         } else if (temp == 5) {    //exit
+                            system.identity = 3;
                             break;
                         } else {
                             java.lang.System.out.println("input is not valid");
@@ -236,25 +228,28 @@ public class System {
                     Customer currentCustomer = new Customer(system, customerNum);
                     outer:
                     while (true) {
-                        java.lang.System.out.println("\n\nchoose what do to: \n1) view activity \n2) make call \n3) accept call \n4) log out \n5)exit");
+                        java.lang.System.out.println("\n\nSelect an option: \n1) View activity \n2) Make call \n3) Log out \n4) Exit");
                         String choice = input.nextLine();
                         int temp = Integer.parseInt(choice);
                         if (temp == 1) {
                             currentCustomer.update();
                         } else if (temp == 2) {
                             system.makeCall();
-                        } else if (temp == 3) {
-                            system.answerCall();
-                        } else if (temp == 4) {    //log out of menu
+                        } else if (temp == 3) {    //log out of menu
                             system.login();
                             break outer;
-                        } else if (temp == 5) {
+                        } else if (temp == 4) {
+                            system.identity= 3;
                             break;
                         } else {
                             java.lang.System.out.println("input is not valid");
                         }
                     }
+                case 3: {
+                    input.close();
+                    java.lang.System.out.println("Thank You");
                     break;
+                }
             }
         }
     }
