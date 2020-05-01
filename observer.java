@@ -1,6 +1,5 @@
-
 public interface observer {
 
-    public void update();
-
+	public void update();
+	
 }

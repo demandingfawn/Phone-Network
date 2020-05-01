@@ -1,3 +1,4 @@
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -15,17 +16,17 @@ public class Database {
     public int getTotalUsers(){
         return this.RegisteredNumbers.size();
     }
-
-    //return true if Username and password combination is valid
+    
+	//return true if Username and password combination is valid
     public int isValid(String ID, String PW) {
-        for(int i = 0; i<this.Usernames.size(); i++) {
-            if(ID.equals(Usernames.get(i))) {
-                if(PW.equals(Passwords.get(i))) {
-                    return i+1;
-                }
-            }
-        }
-        return 0;
+    	for(int i = 0; i<this.Usernames.size(); i++) {
+    		if(ID.equals(Usernames.get(i))) {
+    			if(PW.equals(Passwords.get(i))) {
+    				return i+1;
+    			}
+    		}
+    	}
+    	return 0;
 
     }
 

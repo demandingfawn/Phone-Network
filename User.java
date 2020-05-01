@@ -1,3 +1,4 @@
+
 public class User{
     private Boolean isAvailable = true;
     private Integer number;
